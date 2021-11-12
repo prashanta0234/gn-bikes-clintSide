@@ -8,7 +8,7 @@ import "./HomeBikes.css";
 const HomeBikes = () => {
   const [homeBike, setHomeBike] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/bikes")
+    fetch("https://stark-gorge-80580.herokuapp.com/bikes")
       .then((res) => res.json())
       .then((data) => setHomeBike(data));
   }, []);

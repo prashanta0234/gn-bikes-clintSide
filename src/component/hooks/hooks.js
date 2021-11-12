@@ -22,7 +22,7 @@ const useFirebase = () => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user?.email}`)
+    fetch(`https://stark-gorge-80580.herokuapp.com/users/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setIsAdmin(data?.admin));
   }, [user?.email]);
@@ -87,7 +87,7 @@ const useFirebase = () => {
   const saveUser = (email, password, name) => {
     setisLoding(true);
     axios
-      .post("http://localhost:5000/users", {
+      .post("https://stark-gorge-80580.herokuapp.com/users", {
         email: email,
         password: password,
         displayName: name,

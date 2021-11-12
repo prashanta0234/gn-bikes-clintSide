@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 const ShowDeshbord = () => {
   const { user, isloding } = useAuth();
   const [orders, setOrders] = useState([]);
-  const url = `http://localhost:5000/emailorders?email=${user.email}`;
+  const url = `https://stark-gorge-80580.herokuapp.com/emailorders?email=${user.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -26,7 +26,7 @@ const ShowDeshbord = () => {
   const handleDelate = (id) => {
     const procced = window.confirm("Sure to delate Orders");
     if (procced) {
-      const url = `http://localhost:5000/orders/${id}`;
+      const url = `https://stark-gorge-80580.herokuapp.com/orders/${id}`;
       fetch(url, {
         method: "DELETE",
       })

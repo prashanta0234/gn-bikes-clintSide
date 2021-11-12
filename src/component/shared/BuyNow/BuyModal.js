@@ -89,7 +89,7 @@ const BuyModal = ({ open, handleClose, bike, setSuccess }) => {
     //   price: bike?.price,
     // };
     axios
-      .post("http://localhost:5000/orders", {
+      .post("https://stark-gorge-80580.herokuapp.com/orders", {
         ...buyinfo,
         productName: bike?.bikeName,
         productId: bike?._id,

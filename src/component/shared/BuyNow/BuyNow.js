@@ -25,7 +25,7 @@ const BuyNow = () => {
   const [bike, setBike] = useState({});
   const [success, setSuccess] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/bikes")
+    fetch("https://stark-gorge-80580.herokuapp.com/bikes")
       .then((res) => res.json())
       .then((data) => setBikes(data));
   }, []);

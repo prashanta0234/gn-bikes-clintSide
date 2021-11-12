@@ -14,7 +14,7 @@ const AddAdmin = () => {
     console.log(email);
     const user = { email };
     axios
-      .put("http://localhost:5000/users/admin", user, {
+      .put("https://stark-gorge-80580.herokuapp.com/users/admin", user, {
         headers: { "Content-Type": "application/json" },
       })
       .then(function (response) {

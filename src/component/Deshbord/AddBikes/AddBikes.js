@@ -19,13 +19,13 @@ const AddBikes = () => {
     const procced = window.confirm("Sure to delate Orders");
     if (procced) {
       axios
-        .post("http://localhost:5000/bikes", {
+        .post("https://stark-gorge-80580.herokuapp.com/bikes", {
           ...addbike,
         })
         .then(function (response) {
           if (response.data.insertedId) {
             setSuccess(true);
-            alert("delated SuccessFully");
+            alert("Added SuccessFully");
           }
 
           console.log(response);
@@ -40,9 +40,7 @@ const AddBikes = () => {
   };
   return (
     <div>
-      {success && (
-        <Alert>Proceed SuccessFull Please Goto Deshbord And pay Bill.</Alert>
-      )}
+      {success && <Alert>Added Success Fully.</Alert>}
       <Box sx={{ mt: 2 }} component="form" onSubmit={handleBike}>
         <TextField
           id="outlined-required"

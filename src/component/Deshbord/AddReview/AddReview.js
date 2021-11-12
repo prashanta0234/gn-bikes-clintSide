@@ -20,7 +20,7 @@ const AddReview = ({ user }) => {
     const procced = window.confirm("Sure to Submit Review");
     if (procced) {
       axios
-        .post("http://localhost:5000/reviews", {
+        .post("https://stark-gorge-80580.herokuapp.com/reviews", {
           ...addReview,
           name: displayName,
           img: photoURL,
@@ -44,9 +44,7 @@ const AddReview = ({ user }) => {
   console.log(user);
   return (
     <div>
-      {success && (
-        <Alert>Proceed SuccessFull Please Goto Deshbord And pay Bill.</Alert>
-      )}
+      {success && <Alert>Added SuccessFull.</Alert>}
       <Box sx={{ mt: 2 }} component="form" onSubmit={handleBike}>
         <TextField
           id="outlined-required"

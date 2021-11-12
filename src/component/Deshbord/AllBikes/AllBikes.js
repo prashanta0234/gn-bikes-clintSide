@@ -15,7 +15,7 @@ import { Grid } from "@mui/material";
 const AllBikes = () => {
   const [homeBikes, setHomeBike] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/bikes")
+    fetch("https://stark-gorge-80580.herokuapp.com/bikes")
       .then((res) => res.json())
       .then((data) => setHomeBike(data));
   }, []);
@@ -23,7 +23,7 @@ const AllBikes = () => {
   const handleDelate = (id) => {
     const procced = window.confirm("Sure to delate Orders");
     if (procced) {
-      const url = `http://localhost:5000/bikes/${id}`;
+      const url = `https://stark-gorge-80580.herokuapp.com/bikes/${id}`;
       fetch(url, {
         method: "DELETE",
       })

@@ -13,7 +13,7 @@ import { Box } from "@mui/system";
 const ShowAdminDeshbord = () => {
   // const { user } = useAuth();
   const [orders, setOrders] = useState([]);
-  const url = `http://localhost:5000/orders`;
+  const url = `https://stark-gorge-80580.herokuapp.com/orders`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -24,7 +24,7 @@ const ShowAdminDeshbord = () => {
   const handleDelate = (id) => {
     const procced = window.confirm("Sure to delate Orders");
     if (procced) {
-      const url = `http://localhost:5000/orders/${id}`;
+      const url = `https://stark-gorge-80580.herokuapp.com/orders/${id}`;
       fetch(url, {
         method: "DELETE",
       })

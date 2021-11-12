@@ -11,6 +11,9 @@ import Deshbord from "./component/Deshbord/Deshbord";
 import UserOrders from "./component/Deshbord/order/UserOrders";
 
 import Payment from "./component/Pay/Payment";
+import Contact from "./component/Contact/Contact";
+import About from "./component/About/About";
+import NotFound from "./component/NotFound/NotFound";
 
 function App() {
   return (
@@ -39,11 +42,20 @@ function App() {
             <Route path="/yourorders">
               <UserOrders></UserOrders>
             </Route>
+            <Route path="/contact">
+              <Contact></Contact>
+            </Route>
+            <Route path="/about">
+              <About></About>
+            </Route>
             <Route path="/pay">
               <Payment></Payment>
             </Route>
             <Route exact path="/">
               <Home></Home>
+            </Route>
+            <Route path="">
+              <NotFound></NotFound>
             </Route>
           </Switch>
         </BrowserRouter>
