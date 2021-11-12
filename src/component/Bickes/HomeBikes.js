@@ -24,7 +24,7 @@ const HomeBikes = () => {
           </Typography>
           <Grid container spacing={2} sx={{ mx: "auto" }}>
             {sliceBike.map((bike) => (
-              <Grid item xs={12} md={4}>
+              <Grid item xs={11} md={4}>
                 <ShowHomeBike bikes={bike}></ShowHomeBike>
               </Grid>
             ))}

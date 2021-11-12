@@ -2,6 +2,7 @@ import {
   AppBar,
   Button,
   Container,
+  Grid,
   Toolbar,
   Typography,
   useMediaQuery,
@@ -27,15 +28,37 @@ const Header = () => {
   return (
     <div>
       <Box sx={{ p: 1, bgcolor: "#1B3E41", color: "#97ADAF" }}>
-        <Container sx={{ display: "flex" }}>
-          <Typography
-            sx={{ display: "flex", justifyContent: "left", flexGrow: 1, p: 1 }}
-          >
-            <AddLocationIcon></AddLocationIcon> &nbsp; Mirpur 2, Dhaka,
-            Bangladesh &nbsp; &nbsp; &nbsp; <CallIcon></CallIcon> &nbsp;
-            01754540234
-          </Typography>
-          <Box sx={{ justifyContent: "right" }}>
+        <Container sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={6}>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "left",
+                    flexGrow: 1,
+                    p: 1,
+                  }}
+                >
+                  <AddLocationIcon></AddLocationIcon> &nbsp; Mirpur 2, Dhaka,
+                  Bangladesh &nbsp; &nbsp;
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "left",
+                    flexGrow: 1,
+                    p: 1,
+                  }}
+                >
+                  &nbsp; <CallIcon></CallIcon> &nbsp; 01754540234
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+          <Box sx={{ justifyContent: "right", right: 0 }}>
             {user.email ? (
               <Box>
                 <Link to="/deshbord">

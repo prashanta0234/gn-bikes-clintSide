@@ -24,7 +24,7 @@ const WhyUs = () => {
             <Box className="bikeHeder"></Box>
           </Typography>
           <Grid container spacing={2} sx={{ pb: 15 }}>
-            <Grid item xs={6} md={3} sx={{ px: 2 }}>
+            <Grid item xs={12} md={3} sx={{ px: 2 }}>
               <Box sx={{ display: "flex" }}>
                 <LoyaltyIcon sx={{ fontSize: "3rem", color: "#B05B3B" }}>
                   {" "}
@@ -38,7 +38,7 @@ const WhyUs = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={6} md={3} sx={{ px: 2 }}>
+            <Grid item xxs xs={12} md={3} sx={{ px: 2 }}>
               <Box sx={{ display: "flex" }}>
                 <SpeedIcon sx={{ fontSize: "3rem", color: "#B05B3B" }}>
                   {" "}
@@ -52,7 +52,7 @@ const WhyUs = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={6} md={3} sx={{ px: 2 }}>
+            <Grid item xs={12} md={3} sx={{ px: 2 }}>
               <Box sx={{ display: "flex" }}>
                 <ForumIcon sx={{ fontSize: "3rem", color: "#B05B3B" }}>
                   {" "}
@@ -66,7 +66,7 @@ const WhyUs = () => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={6} md={3} sx={{ px: 2 }}>
+            <Grid item xs={12} md={3} sx={{ px: 2 }}>
               <Box sx={{ display: "flex" }}>
                 <SettingsIcon sx={{ fontSize: "3rem", color: "#B05B3B" }}>
                   {" "}
