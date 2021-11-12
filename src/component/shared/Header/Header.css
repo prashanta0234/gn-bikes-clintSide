@@ -1,0 +1,12 @@
+.nav a {
+  text-decoration: none;
+  margin-left: 30px;
+  color: black;
+  font-size: 18px;
+  padding: 5px;
+}
+.active {
+  border-bottom: 1px solid #ff903e;
+  border-top: 1px solid #ff903e;
+  font-weight: 700;
+}
