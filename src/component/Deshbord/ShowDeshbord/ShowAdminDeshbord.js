@@ -37,7 +37,7 @@ const ShowAdminDeshbord = () => {
           if (data.deletedCount > 0) {
             const remainingOrder = orders.filter((order) => order._id !== id);
             setOrders(remainingOrder);
-            alert("delated SuccessFully");
+            alert("deleted SuccessFully");
           }
         });
     }
@@ -47,7 +47,7 @@ const ShowAdminDeshbord = () => {
     <div>
       <Typography variant="h2" sx={{ color: "tomato", fontWeight: 800 }}>
         {" "}
-        Totoal {orders?.length} Orders
+        Total {orders?.length} Orders
       </Typography>
       {isMobile ? (
         <Grid container spacing={2}>

@@ -30,25 +30,25 @@ const Header = () => {
       <Box sx={{ p: 1, bgcolor: "#1B3E41", color: "#97ADAF" }}>
         <Container sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               <Grid item xs={12} md={6}>
                 <Typography
                   sx={{
                     display: "flex",
                     justifyContent: "left",
-                    flexGrow: 1,
-                    p: 1,
+                    // flexGrow: 1,
+                    py: 1,
                   }}
                 >
                   <AddLocationIcon></AddLocationIcon> &nbsp; Mirpur 2, Dhaka,
-                  Bangladesh &nbsp; &nbsp;
+                  Bangladesh
                 </Typography>
               </Grid>
               <Grid item xs={12} md={6}>
                 <Typography
                   sx={{
                     display: "flex",
-                    justifyContent: "left",
+                    // justifyContent: "left",
                     flexGrow: 1,
                     p: 1,
                   }}
@@ -62,7 +62,7 @@ const Header = () => {
             {user.email ? (
               <Box>
                 <Link to="/deshbord">
-                  <Button>Deshbord</Button>
+                  <Button>Deshboard</Button>
                 </Link>
                 <Button onClick={logOut}>Logout</Button>
               </Box>
