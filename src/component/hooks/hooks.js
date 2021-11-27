@@ -109,6 +109,7 @@ const useFirebase = () => {
     registation,
     UserLogin,
     isAdmin,
+    error,
   };
 };
 export default useFirebase;

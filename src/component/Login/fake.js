@@ -1,17 +1,17 @@
 import { Button, CircularProgress, Grid, useMediaQuery } from "@mui/material";
 import { useTheme } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
 import { Link, useLocation, useHistory } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import "../Login.css";
-import { TramOutlined } from "@mui/icons-material";
-
+import useAuth from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
+
+import "./Login.css";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -19,31 +19,33 @@ const schema = yup
   .object()
   .shape({
     name: yup.string().required(),
-    email: yup.string().required(),
-    password: yup.string().required().min(5),
+    age: yup.number().required(),
   })
   .required();
 
-const Registration = () => {
+const Login = () => {
+  const [input, setInput] = useState({});
+  const { UserLogin, isloding } = useAuth();
   const location = useLocation();
   const history = useHistory();
-  const { registation, isloding } = useAuth();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  useAuth();
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const handleRegister = (e) => {
-    if (e?.password !== e?.password2) {
-      alert("Your PassWord didnt match!");
-      return;
-    }
-
-    registation(e.email, e.password, e.name, location, history);
-    console.log(errors.message);
+  const handleOnchange = (e) => {
+    const feild = e.target.name;
+    const value = e.target.value;
+    const newLoginData = { ...input };
+    newLoginData[feild] = value;
+    setInput(newLoginData);
+  };
+  const handleLogin = (e) => {
+    UserLogin(input?.email, input?.password, location, history);
+    e.preventDefault();
+    console.log(input);
   };
 
   return (
@@ -57,34 +59,31 @@ const Registration = () => {
                   mt: 2,
                   // border: "1px solid black",
                   width: "90%",
+
                   boxShadow: 3,
-                  mx: "auto",
                   bgcolor: "white",
+                  mx: "auto",
                 }}
-                className="forpc"
               >
-                <form onSubmit={handleSubmit(handleRegister)}>
+                <Box
+                  sx={{ p: 6 }}
+                  component="form"
+                  onSubmit={handleSubmit(handleLogin)}
+                >
                   <Typography
                     variant="h6"
                     sx={{ textAlign: "center", fontWeight: 800 }}
                   >
-                    Registration
+                    {" "}
+                    Login
                   </Typography>
-                  <TextField
-                    id="standard-basic"
-                    label="Enter Your Name"
-                    variant="standard"
-                    type="text"
-                    // helperText={errors}
-                    {...register("name", { required: true, maxLength: 20 })}
-                    sx={{ width: "100%", mb: 1 }}
-                  />{" "}
                   <TextField
                     id="standard-basic"
                     label="Email"
                     variant="standard"
+                    name="email"
                     type="email"
-                    {...register("email", { required: TramOutlined })}
+                    ref={register}
                     sx={{ width: "100%", mb: 1 }}
                   />{" "}
                   <br />
@@ -93,15 +92,8 @@ const Registration = () => {
                     label="Password"
                     variant="standard"
                     type="password"
-                    {...register("password", { required: true })}
-                    sx={{ width: "100%", mb: 1 }}
-                  />
-                  <TextField
-                    id="standard-basic"
-                    label=" Re-Type-Password"
-                    variant="standard"
-                    type="password"
-                    {...register("password2", { required: true })}
+                    name="password"
+                    ref={register}
                     sx={{ width: "100%", mb: 1 }}
                   />
                   <Button
@@ -110,7 +102,7 @@ const Registration = () => {
                       my: 2,
                       backgroundImage:
                         "linear-gradient(to right, #19d3ae, #0fcfec)",
-                      padding: "15px 30px",
+                      padding: "10px 25px",
                       border: "none",
 
                       color: "white",
@@ -121,17 +113,13 @@ const Registration = () => {
                     type="submit"
                   >
                     {" "}
-                    {isloding ? (
-                      <CircularProgress />
-                    ) : (
-                      <Typography>Register</Typography>
-                    )}
+                    Sign In
                   </Button>
                   <Typography>
-                    Already Have an Account?
-                    <Link to="/login"> Please Login</Link>
+                    You are new? Please
+                    <Link to="/registration"> Create Account </Link>
                   </Typography>
-                </form>
+                </Box>
               </Box>
             ) : (
               <Box
@@ -141,31 +129,24 @@ const Registration = () => {
                   width: "40%",
 
                   boxShadow: 3,
-                  mx: "auto",
                   bgcolor: "white",
+                  mx: "auto",
                 }}
-                className="forpc"
               >
-                <form onSubmit={handleSubmit(handleRegister)}>
+                <Box sx={{ p: 6 }} component="form" onSubmit={handleLogin}>
                   <Typography
                     variant="h6"
                     sx={{ textAlign: "center", fontWeight: 800 }}
                   >
-                    Registration
+                    {" "}
+                    Login
                   </Typography>
-                  <TextField
-                    id="standard-basic"
-                    label="Enter Your Name"
-                    variant="standard"
-                    {...register("name", { required: true, maxLength: 20 })}
-                    sx={{ width: "100%", mb: 1 }}
-                  />{" "}
                   <TextField
                     id="standard-basic"
                     label="Email"
                     variant="standard"
-                    type="email"
-                    {...register("email", { required: true })}
+                    name="email"
+                    onChange={handleOnchange}
                     sx={{ width: "100%", mb: 1 }}
                   />{" "}
                   <br />
@@ -174,15 +155,8 @@ const Registration = () => {
                     label="Password"
                     variant="standard"
                     type="password"
-                    {...register("password", { required: true })}
-                    sx={{ width: "100%", mb: 1 }}
-                  />
-                  <TextField
-                    id="standard-basic"
-                    label=" Re-Type-Password"
-                    variant="standard"
-                    type="password"
-                    {...register("password2", { required: true })}
+                    name="password"
+                    onChange={handleOnchange}
                     sx={{ width: "100%", mb: 1 }}
                   />
                   <Button
@@ -191,7 +165,7 @@ const Registration = () => {
                       my: 2,
                       backgroundImage:
                         "linear-gradient(to right, #19d3ae, #0fcfec)",
-                      padding: "15px 30px",
+                      padding: "10px 25px",
                       border: "none",
 
                       color: "white",
@@ -204,14 +178,14 @@ const Registration = () => {
                     {isloding ? (
                       <CircularProgress />
                     ) : (
-                      <Typography>Register</Typography>
+                      <Typography>Sign In</Typography>
                     )}
                   </Button>
                   <Typography>
-                    Already Have an Account?
-                    <Link to="/login"> Please Login</Link>
+                    You are new? Please
+                    <Link to="/registration"> Create Account </Link>
                   </Typography>
-                </form>
+                </Box>
               </Box>
             )}
           </Grid>
@@ -221,4 +195,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Login;

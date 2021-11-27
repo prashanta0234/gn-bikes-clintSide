@@ -2,3 +2,11 @@
   background-image: url(../../images//BackGround.jpg);
   height: 100vh;
 }
+.forpc form {
+  padding: 55px;
+}
+/* .forpc form input {
+  width: "100%";
+  margin-bottom: 10px;
+  padding: 10px;
+} */

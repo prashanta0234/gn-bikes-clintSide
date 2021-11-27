@@ -1,38 +1,44 @@
-import { Button, CircularProgress, Grid, useMediaQuery } from "@mui/material";
-import { useTheme } from "@material-ui/core";
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-
-import { Link, useLocation, useHistory } from "react-router-dom";
+import {
+  Button,
+  CircularProgress,
+  Container,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import { Box, useTheme } from "@mui/system";
+import React from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import useAuth from "../hooks/useAuth";
+import { useHistory, useLocation } from "react-router";
 
-import "./Login.css";
+const schema = yup
+  .object()
+  .shape({
+    email: yup.string().required(),
+    password: yup.string().required(),
+  })
+  .required();
 
 const Login = () => {
-  const [input, setInput] = useState({});
   const { UserLogin, isloding } = useAuth();
   const location = useLocation();
   const history = useHistory();
+
+  const { register, handleSubmit } = useForm({
+    resolver: yupResolver(schema),
+  });
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  if (isloding) {
-    return <CircularProgress />;
-  }
-  const handleOnchange = (e) => {
-    const feild = e.target.name;
-    const value = e.target.value;
-    const newLoginData = { ...input };
-    newLoginData[feild] = value;
-    setInput(newLoginData);
-  };
   const handleLogin = (e) => {
-    UserLogin(input?.email, input?.password, location, history);
-    e.preventDefault();
-    console.log(input);
+    UserLogin(e?.email, e?.password, location, history);
+    console.log(e);
   };
 
   return (
@@ -41,44 +47,47 @@ const Login = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={12}>
             {isMobile ? (
+              // mobile device
               <Box
                 sx={{
                   mt: 2,
-                  // border: "1px solid black",
                   width: "90%",
-
                   boxShadow: 3,
                   bgcolor: "white",
                   mx: "auto",
+                  borderRadius: "10px",
                 }}
+                className="forpc"
               >
-                <Box sx={{ p: 6 }} component="form" onSubmit={handleLogin}>
+                <form onSubmit={handleSubmit(handleLogin)}>
                   <Typography
                     variant="h6"
                     sx={{ textAlign: "center", fontWeight: 800 }}
                   >
-                    {" "}
                     Login
                   </Typography>
                   <TextField
+                    type="email"
+                    sx={{ width: "100%", mb: 1 }}
                     id="standard-basic"
                     label="Email"
                     variant="standard"
-                    name="email"
-                    onChange={handleOnchange}
-                    sx={{ width: "100%", mb: 1 }}
+                    {...register("email", { required: true })}
                   />{" "}
                   <br />
                   <TextField
+                    sx={{ width: "100%", mb: 1 }}
+                    type="password"
                     id="standard-basic"
                     label="Password"
                     variant="standard"
-                    type="password"
-                    name="password"
-                    onChange={handleOnchange}
-                    sx={{ width: "100%", mb: 1 }}
-                  />
+                    {...register("password")}
+                  />{" "}
+                  <br />
+                  {/* <input type="number" {...register("age", { min: 18, max: 99 })} /> */}
+                  {/* <input type="submit" /> */}
                   <Button
+                    type="submit"
                     sx={{
                       width: "100%",
                       my: 2,
@@ -92,56 +101,64 @@ const Login = () => {
                       cursor: "pointer",
                       marginTop: "20px",
                     }}
-                    type="submit"
                   >
-                    {" "}
-                    Sign In
+                    {isloding ? (
+                      <CircularProgress />
+                    ) : (
+                      <Typography>Sign In</Typography>
+                    )}
                   </Button>
-                  <Typography>
-                    You are new? Please
-                    <Link to="/registration"> Create Account </Link>
-                  </Typography>
-                </Box>
+                </form>
+                <Typography>
+                  You are new? Please
+                  <Link to="/registration"> Create Account </Link>
+                </Typography>
               </Box>
             ) : (
               <Box
                 sx={{
+                  // textAlign: "center",
+                  boxShadow: 3,
                   mt: 15,
                   // border: "1px solid black",
                   width: "40%",
 
-                  boxShadow: 3,
                   bgcolor: "white",
                   mx: "auto",
+
+                  borderRadius: "10px",
                 }}
+                className="forpc"
               >
-                <Box sx={{ p: 6 }} component="form" onSubmit={handleLogin}>
+                <form onSubmit={handleSubmit(handleLogin)}>
                   <Typography
                     variant="h6"
                     sx={{ textAlign: "center", fontWeight: 800 }}
                   >
-                    {" "}
                     Login
                   </Typography>
                   <TextField
+                    type="email"
+                    sx={{ width: "100%", mb: 1 }}
                     id="standard-basic"
                     label="Email"
                     variant="standard"
-                    name="email"
-                    onChange={handleOnchange}
-                    sx={{ width: "100%", mb: 1 }}
+                    {...register("email", { required: true })}
                   />{" "}
                   <br />
                   <TextField
+                    sx={{ width: "100%", mb: 1 }}
+                    type="password"
                     id="standard-basic"
                     label="Password"
                     variant="standard"
-                    type="password"
-                    name="password"
-                    onChange={handleOnchange}
-                    sx={{ width: "100%", mb: 1 }}
-                  />
+                    {...register("password")}
+                  />{" "}
+                  <br />
+                  {/* <input type="number" {...register("age", { min: 18, max: 99 })} /> */}
+                  {/* <input type="submit" /> */}
                   <Button
+                    type="submit"
                     sx={{
                       width: "100%",
                       my: 2,
@@ -155,16 +172,18 @@ const Login = () => {
                       cursor: "pointer",
                       marginTop: "20px",
                     }}
-                    type="submit"
                   >
-                    {" "}
-                    Sign In
+                    {isloding ? (
+                      <CircularProgress />
+                    ) : (
+                      <Typography>Sign In</Typography>
+                    )}
                   </Button>
                   <Typography>
                     You are new? Please
-                    <Link to="/registration"> Create Account </Link>
+                    <a href="/registration"> Create Account </a>
                   </Typography>
-                </Box>
+                </form>
               </Box>
             )}
           </Grid>
@@ -175,4 +194,3 @@ const Login = () => {
 };
 
 export default Login;
-<h1>this is login page</h1>;
